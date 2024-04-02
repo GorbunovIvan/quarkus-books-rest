@@ -2,6 +2,13 @@
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
+<h2>
+<p>This is a simple rest service (microservice) built using Quarkus.</p>
+<p>It demonstrates how to create a simple resource (controller), service and repository classes to store some objects using a database (PostgreSQL here).</p>
+<p>The service is fully covered by tests.</p>
+</h2>
+<br/>
+
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
 ## Running the application in dev mode
