@@ -1,0 +1,30 @@
+
+version: "3.8"
+
+services:
+
+  #  Postgres
+  postgres-db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: quarkus-books-rest
+    healthcheck:
+      # We need to pass the user and database argument (user follows "-U" param and db follows "-d" param):
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "quarkus-books-rest"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  #  App
+  quarkus-books-rest:
+    depends_on:
+      - postgres-db
+    image: ivangorbunovv/quarkus-books-rest-image
+    ports:
+      - "8080:8080"
+    environment:
+      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://postgres-db:5432/quarkus-books-rest
